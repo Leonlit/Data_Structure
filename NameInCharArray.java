@@ -10,8 +10,13 @@ class NameInCharArray {
 
         System.out.println("Re-printing your name, give me a moment");
         System.out.print("\nOh so you're ");
-        for (int index = 0; index < name.length(); index++) {
-            System.out.print(arr[index]);
+        for (char character: arr) {
+            try {
+                Thread.sleep(100);
+                System.out.print(character);
+            }catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
         }
 
         System.out.println("\nNice to meet you.");
