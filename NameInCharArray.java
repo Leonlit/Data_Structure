@@ -1,15 +1,22 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
+
+import org.graalvm.compiler.nodes.java.ArrayLengthNode;
 
 class NameInCharArray {
     public static void main (String[] args) {
         Scanner input = new Scanner (System.in);
-        printStringWithDelays("\nWelcome user, please input your name and I'll print it out again:");
+        printStringWithDelays("\nWelcome user, please input your name and I'll print it out again:\n");
         String name = input.nextLine();
         input.close();
         char arr[] = name.toCharArray();
 
-        printStringWithDelays("Re-printing your name, give me a moment");
+        printStringWithDelays("\nRe-printing your name, give me a moment");
         printStringWithDelays("\nOh so you're ");
+        char revArr[] = reversingCharArray(arr);
+        printWithDelays(revArr);
+        printStringWithDelays("\nOh, sorry it should be, ");
         printWithDelays(arr);
 
         printStringWithDelays("\nNice to meet you.");
@@ -30,5 +37,15 @@ class NameInCharArray {
                 System.out.println(ex);
             }
         }
+        System.out.println();
+    }
+
+    static char[] reversingCharArray (char arr[]) {
+        char newArr[] = new char[arr.length];
+        int arrLength = arr.length - 1;
+        for (int index = arrLength ;index >= 0; index--) {
+            newArr[arrLength - index] = arr[index];
+        }
+        return newArr;
     }
 }
