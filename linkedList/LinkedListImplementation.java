@@ -19,7 +19,11 @@ class LinkedList {
     }
 
     private boolean isHeadNull() {
-        return this.head == null;
+        boolean headNull = this.head == null;
+        if (headNull) {
+            System.out.println("Linked list is empty!");
+        }
+        return headNull;
     }
 
     public void pushNode (Node newNode) {
@@ -58,10 +62,20 @@ class LinkedList {
         }
     }
 
+    public void popNode() {
+        if (!isHeadNull()) {
+            Node current = this.head;
+            while (current != null) {
+                System.out.print(current.getValue());
+                current = current.getNextNode();
+                if (current != null) System.out.print(" -> ");
+            }
+            System.out.println("");
+        } 
+    }
+
     public void printList() {
-        if (isHeadNull()) {
-            System.out.println("Linked list is empty!");
-        }else {
+        if (!isHeadNull()) {
             Node current = this.head;
             while (current != null) {
                 System.out.print(current.getValue());

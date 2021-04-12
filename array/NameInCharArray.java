@@ -1,3 +1,5 @@
+package NameInCharArray;
+
 import java.util.Scanner;
 
 class NameInCharArray {
