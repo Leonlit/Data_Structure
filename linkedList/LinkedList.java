@@ -14,6 +14,7 @@ public class LinkedList {
         return headNull;
     }
 
+    //adding a node to the last position of the list
     public void pushNode (Node newNode) {
         if (isHeadNull()) {
             this.head = newNode;
@@ -27,6 +28,7 @@ public class LinkedList {
         this.size++;
     }
 
+    //inserting node into certain position (within the size of the new list)
     public void insertNode (Node newNode, int pos) {
         if (!isHeadNull()) {
             if (pos < 0) {
@@ -38,7 +40,7 @@ public class LinkedList {
                 System.out.println("Position " + pos + " out of list's boundary");
             }else {
                 if (pos == 0) {
-                    unshiftNode(newNode);
+                    unshiftList(newNode);
                 }else {
                     Node currentNode = this.head;
                     for (int x = 0; x < pos - 1; x++) {
@@ -51,23 +53,40 @@ public class LinkedList {
         }
     }
 
-    public void unshiftNode (Node newNode) {
-        newNode.setNextNode(this.head);
-        this.head = newNode;
+    //unshifting the list (adding node to index 0)
+    public void unshiftList (Node newNode) {
+        if (newNode != null) {
+            newNode.setNextNode(this.head);
+            this.head = newNode;
+        }else {
+            System.out.println("Can't add null into the list");
+        }
     }
 
-    public void popNode() {
+    //shifting the list (removing the first node)
+    public void shiftList () {
+        if (!isHeadNull()) {
+            this.head = this.head.getNextNode();
+        }
+    }
+
+    //removing a node a the last position
+    public void popNode () {
         if (!isHeadNull()) {
             Node current = this.head;
-            while (current != null) {
-                System.out.print(current.getValue());
-                current = current.getNextNode();
-                if (current != null) System.out.print(" -> ");
+            while (current.getNextNode() != null) {
+                Node nextNode = current.getNextNode();
+                if (nextNode.getNextNode() == null) {
+                    current.setNextNode(null);
+                }else {
+                    current = nextNode;
+                }
             }
-            System.out.println("");
-        } 
+        }
+        this.size--;
     }
 
+    //printing out the linkedlist in a customized way
     public void printList() {
         if (!isHeadNull()) {
             Node current = this.head;

@@ -5,7 +5,9 @@ public class LinkedListImplementation {
         Node newNode = new Node (2);
         list.pushNode(newNode);
         newNode = new Node (0);
-        list.insertNode(newNode, -4);
+        list.insertNode(newNode, 2);
+        list.printList();
+        list.shiftList();
         list.printList();
     }
 }
