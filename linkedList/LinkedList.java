@@ -86,6 +86,22 @@ public class LinkedList {
         this.size--;
     }
 
+    //reversing linked list using iterative method
+    public void iterateReverseList() {
+        if (!isHeadNull()) {
+            Node curr, next, prev;
+            curr = this.head;
+            prev = null;
+            while (curr != null) {
+                next = curr.getNextNode();
+                curr.setNextNode(prev);
+                prev = curr;
+                curr = next;
+            }
+            this.head = prev;
+        }
+    }
+
     //printing out the linkedlist in a customized way
     public void printList() {
         if (!isHeadNull()) {
@@ -93,6 +109,7 @@ public class LinkedList {
         }
     }
 
+    //overriding the toString() method
     @Override
     public String toString () {
         String list = "";

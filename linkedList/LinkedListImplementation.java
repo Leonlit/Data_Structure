@@ -7,7 +7,11 @@ public class LinkedListImplementation {
         newNode = new Node (0);
         list.insertNode(newNode, 2);
         list.printList();
-        list.shiftList();
+        newNode = new Node (3);
+        list.insertNode(newNode, 2);
+        //list.shiftList();
+        list.printList();
+        list.iterateReverseList();
         list.printList();
     }
 }
