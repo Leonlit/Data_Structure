@@ -13,5 +13,7 @@ public class LinkedListImplementation {
         list.printList();
         list.iterateReverseList();
         list.printList();
+        list.recursivelyReverseList(null);
+        list.printList();
     }
 }

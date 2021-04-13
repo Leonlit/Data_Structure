@@ -102,6 +102,19 @@ public class LinkedList {
         }
     }
 
+    public void recursivelyReverseList (Node curr) {
+        if (curr == null) {
+            curr = this.head;
+        }
+        if (curr.getNextNode() == null) {
+            this.head = curr;
+            return;
+        }
+        recursivelyReverseList(curr.getNextNode());
+        curr.getNextNode().setNextNode(curr);
+        curr.setNextNode(null);
+    }
+
     //printing out the linkedlist in a customized way
     public void printList() {
         if (!isHeadNull()) {
