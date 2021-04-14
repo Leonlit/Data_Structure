@@ -1,8 +1,11 @@
 public class LinkedList {
     private Node head;
-    private int size = 1;
+    private int size;
 
     public LinkedList (Node head) {
+        if (head != null) {
+            this.size = 1;
+        }
         this.head = head;
     }
 
@@ -16,27 +19,31 @@ public class LinkedList {
 
     //adding a node to the last position of the list
     public void pushNode (Node newNode) {
-        if (isHeadNull()) {
-            this.head = newNode;
-        }else {
-            Node current = this.head;
-            while (current.getNextNode() != null) {
-                current = current.getNextNode();
+        if (newNode != null) {
+            if (isHeadNull()) {
+                this.head = newNode;
+            }else {
+                Node current = this.head;
+                while (current.getNextNode() != null) {
+                    current = current.getNextNode();
+                }
+                current.setNextNode(newNode);
             }
-            current.setNextNode(newNode);
+            this.size++;
+        }else {
+            warningNullParam();
         }
-        this.size++;
     }
 
     //inserting node into certain position (within the size of the new list)
     public void insertNode (Node newNode, int pos) {
-        if (!isHeadNull()) {
+        if (newNode == null) {
+            warningNullParam();
+        }else {
             if (pos < 0) {
                 pos = size - Math.abs(pos + 1);
             }
-            size++;
-            if (pos > size || pos < 0) {
-                size--;
+            if (pos - 1 > size || pos < 0) {
                 System.out.println("Position " + pos + " out of list's boundary");
             }else {
                 if (pos == 0) {
@@ -48,6 +55,7 @@ public class LinkedList {
                     }
                     newNode.setNextNode(currentNode.getNextNode());
                     currentNode.setNextNode(newNode);
+                    this.size++;
                 }
             }
         }
@@ -58,8 +66,9 @@ public class LinkedList {
         if (newNode != null) {
             newNode.setNextNode(this.head);
             this.head = newNode;
+            this.size++;
         }else {
-            System.out.println("Can't add null into the list");
+            warningNullParam();
         }
     }
 
@@ -67,13 +76,17 @@ public class LinkedList {
     public void shiftList () {
         if (!isHeadNull()) {
             this.head = this.head.getNextNode();
-            size--;
+            this.size--;
         }
     }
 
     //removing a node a the last position
     public void popNode () {
         if (!isHeadNull()) {
+            if (this.size == 1) {
+                shiftList();
+                return;
+            }
             Node current = this.head;
             while (current.getNextNode() != null) {
                 Node nextNode = current.getNextNode();
@@ -98,15 +111,13 @@ public class LinkedList {
                     prev = prev.getNextNode();
                 }
                 Node current = prev.getNextNode();
-                if (current.getNextNode() == null) {
-                    prev.setNextNode(null);
-                }else if (pos == 0 ){
+                if (pos == 0 ){
                     this.head = this.head.getNextNode();
                 }else {
                     Node next = current.getNextNode();
                     prev.setNextNode(next);
-                    this.size--;
                 }
+                this.size--;
             }
             
         }
@@ -146,6 +157,14 @@ public class LinkedList {
         if (!isHeadNull()) {
             System.out.println(toString());
         }
+    }
+
+    public int getSize () {
+        return this.size;
+    }
+
+    private void warningNullParam () {
+        System.out.println("Warning, The value given into the method is null!");
     }
 
     //overriding the toString() method
