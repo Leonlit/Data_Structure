@@ -8,18 +8,14 @@ public class UnitTesting {
     @Test
     public void testLinkedListCreationAndPushing () {
         LinkedList list = new LinkedList(new Node(1));
-
-        Node newNode = new Node (2);
-        list.pushNode(newNode);
-        
-        newNode = new Node(0);
-        list.pushNode(newNode);
+        list.pushNode(new Node (2));
+        list.pushNode(new Node(0));
         
         assertEquals(list.toString(), "1 -> 2 -> 0");
     }
 
     @Test
-    public void testEmptyHeadPsh() {
+    public void testEmptyHeadPush() {
         LinkedList list = new LinkedList(null);
 
         Node newNode = new Node (1);
@@ -36,8 +32,7 @@ public class UnitTesting {
         LinkedList list = new LinkedList(null);
         assertTrue(list.isHeadNull());
 
-        Node initialHeadNode = new Node(1);
-        list = new LinkedList(initialHeadNode);
+        list = new LinkedList(new Node(1));
         assertFalse(list.isHeadNull());
     }
 
@@ -45,14 +40,9 @@ public class UnitTesting {
     public void testNodeInserts() {
         LinkedList list = new LinkedList(new Node(0));
 
-        Node newNode = new Node(1);
-        list.insertNode(newNode, 1);
-
-        newNode = new Node(2);
-        list.insertNode(newNode, 1);
-
-        newNode = new Node(3);
-        list.insertNode(newNode, 2);
+        list.insertNode(new Node(1), 1);
+        list.insertNode(new Node(2), 1);
+        list.insertNode(new Node(3), 2);
 
         assertEquals(list.toString(), "0 -> 2 -> 3 -> 1");
         assertEquals(list.getSize(), 4);
