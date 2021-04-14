@@ -67,6 +67,7 @@ public class LinkedList {
     public void shiftList () {
         if (!isHeadNull()) {
             this.head = this.head.getNextNode();
+            size--;
         }
     }
 
@@ -82,8 +83,33 @@ public class LinkedList {
                     current = nextNode;
                 }
             }
+            this.size--;
         }
-        this.size--;
+    }
+
+    //removing a node a from a specific position
+    public void deleteNode (int pos) {
+        if (pos > size || pos < 0) {
+            System.out.println("Position " + pos + " out of list's boundary");
+        }else {
+            if (!isHeadNull()) {
+                Node prev = this.head;
+                for (int index = 0; index < pos - 1; index++) {
+                    prev = prev.getNextNode();
+                }
+                Node current = prev.getNextNode();
+                if (current.getNextNode() == null) {
+                    prev.setNextNode(null);
+                }else if (pos == 0 ){
+                    this.head = this.head.getNextNode();
+                }else {
+                    Node next = current.getNextNode();
+                    prev.setNextNode(next);
+                    this.size--;
+                }
+            }
+            
+        }
     }
 
     //reversing linked list using iterative method

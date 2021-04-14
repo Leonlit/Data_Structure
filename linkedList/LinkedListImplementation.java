@@ -15,5 +15,11 @@ public class LinkedListImplementation {
         list.printList();
         list.recursivelyReverseList(null);
         list.printList();
+        list.deleteNode(3);
+        list.printList();
+
+        newNode = new Node (0);
+        list.insertNode(newNode, 3);
+        list.printList();
     }
 }

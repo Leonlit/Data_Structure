@@ -53,7 +53,10 @@ public class UnitTesting {
         newNode = new Node(2);
         list.insertNode(newNode, 1);
 
-        assertEquals(list.toString(), "0 -> 2 -> 1");
+        newNode = new Node(3);
+        list.insertNode(newNode, 2);
+
+        assertEquals(list.toString(), "0 -> 2 -> 3 -> 1");
     }
 
     @Test
