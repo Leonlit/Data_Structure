@@ -1,12 +1,18 @@
+import java.util.HashSet;
+
 public class LinkedList {
     private Node head;
     private int size;
 
     public LinkedList (Node head) {
-        if (head != null) {
+        if (this.head != null) {
             this.size = 1;
         }
         this.head = head;
+    }
+
+    public Node getHead () {
+        return this.head;
     }
 
     public boolean isHeadNull() {
@@ -123,6 +129,43 @@ public class LinkedList {
         }
     }
 
+    //delete specific value from the linked list
+    public void deleteSpecificValue(int value) {
+        Node prev = null;
+        Node current = this.head;
+        while (current != null) {
+            if (current.getValue() == value) {
+                if (prev == null) {
+                    this.head = current.getNextNode();
+                }else {
+                    prev.setNextNode(current.getNextNode());
+                }
+            }
+            prev = current;
+            current = current.getNextNode();
+        }
+    }
+
+    //remove duplicate values in linked list
+    public void removeDuplicate () {
+        if (!isHeadNull()) {
+            HashSet<Integer> hash = new HashSet<>();
+            Node current = this.head;
+            Node prev = null;
+            while (current != null) {
+                int currValue = current.getValue();
+
+                if (hash.contains(currValue)) {
+                    prev.setNextNode(current.getNextNode());
+                }else {
+                    hash.add(currValue);
+                    prev = current;
+                }
+                current = current.getNextNode();
+            }
+        }
+    }
+
     //reversing linked list using iterative method
     public void iterateReverseList() {
         if (!isHeadNull()) {
@@ -139,6 +182,7 @@ public class LinkedList {
         }
     }
 
+    //recursively reversing a linkedlist
     public void recursivelyReverseList (Node curr) {
         if (curr == null) {
             curr = this.head;
