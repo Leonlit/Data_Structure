@@ -48,7 +48,7 @@ public class LinkedListExercise {
 
 	}
     
-    public static LinkedList removeDuplicate (LinkedList list) {
+    public static LinkedListSmall removeDuplicate (LinkedListSmall list) {
         HashSet<Integer> hash = new HashSet<>();
         Node current = list.getHead();
         Node prev = null;
@@ -98,11 +98,11 @@ class Node {
 	
 }
 
-class LinkedList {
+class LinkedListSmall {
     private Node head;
     private int size;
 
-    public LinkedList (Node head) {
+    public LinkedListSmall (Node head) {
         if (head != null) {
             this.size = 1;
         }
