@@ -3,11 +3,11 @@ import java.util.HashSet;
 /*
     Linked List Assignment
     1)Given list of 2 -> 3 -> 4 -> 8 -> 9,
-        a)Delete node contain 4
-        b)Delete node at position 3
+        a)Delete NodeSmall contain 4
+        b)Delete NodeSmall at position 3
 
     2)Given list of 2 -> 3 -> 4 -> 8 -> 9
-        a)Insert new node contains 4 after node position 3.
+        a)Insert new NodeSmall contains 4 after NodeSmall position 3.
         b)Given that you don’t know wether there is a duplicate, write a removeDuplicates() 
           function which takes a list and deletes any duplicate nodes from the list. The list is not sorted.
           Suggestions: Use two loops, one to go through the nodes, another loop (inner loop) to compare between
@@ -18,11 +18,11 @@ public class LinkedListExercise {
 	public static void main (String args[]) {
         //question 1
         System.out.println("\n\nQuestion 1\n");
-        LinkedList list = new LinkedList(new Node(2));
-        list.pushNode(new Node(3));
-        list.pushNode(new Node(4));
-        list.pushNode(new Node(8));
-        list.pushNode(new Node(9));
+        LinkedListSmall list = new LinkedListSmall(new NodeSmall(2));
+        list.pushNode(new NodeSmall(3));
+        list.pushNode(new NodeSmall(4));
+        list.pushNode(new NodeSmall(8));
+        list.pushNode(new NodeSmall(9));
         list.printList();
 
         list.deleteSpecificValue(4);
@@ -33,14 +33,14 @@ public class LinkedListExercise {
 
         //Question 2
         System.out.println("\n\nQuestion 2\n");
-        list = new LinkedList(new Node(2));
-        list.pushNode(new Node(3));
-        list.pushNode(new Node(4));
-        list.pushNode(new Node(8));
-        list.pushNode(new Node(9));
+        list = new LinkedListSmall(new NodeSmall(2));
+        list.pushNode(new NodeSmall(3));
+        list.pushNode(new NodeSmall(4));
+        list.pushNode(new NodeSmall(8));
+        list.pushNode(new NodeSmall(9));
         list.printList();
 
-        list.insertNode(new Node(4), 3);
+        list.insertNode(new NodeSmall(4), 3);
         list.printList();
 
         list = removeDuplicate(list);
@@ -50,8 +50,8 @@ public class LinkedListExercise {
     
     public static LinkedListSmall removeDuplicate (LinkedListSmall list) {
         HashSet<Integer> hash = new HashSet<>();
-        Node current = list.getHead();
-        Node prev = null;
+        NodeSmall current = list.getHead();
+        NodeSmall prev = null;
         while (current != null) {
             int currValue = current.getValue();
 
@@ -67,20 +67,20 @@ public class LinkedListExercise {
     }
 }
 
-class Node {
-    private Node next;
+class NodeSmall {
+    private NodeSmall next;
     private int value;
 
-    public Node (int value) {
+    public NodeSmall (int value) {
         this.value = value;
     }
 
-    public Node (Node next, int value) {
+    public NodeSmall (NodeSmall next, int value) {
         this.next = next;
         this.value = value;
     }
 
-    public Node getNextNode() {
+    public NodeSmall getNextNode() {
         return this.next;
     }
 
@@ -88,7 +88,7 @@ class Node {
         return this.value;
     }
 
-    public void setNextNode (Node newNode) {
+    public void setNextNode (NodeSmall newNode) {
         this.next = newNode;
     }
 
@@ -99,17 +99,17 @@ class Node {
 }
 
 class LinkedListSmall {
-    private Node head;
+    private NodeSmall head;
     private int size;
 
-    public LinkedListSmall (Node head) {
+    public LinkedListSmall (NodeSmall head) {
         if (head != null) {
             this.size = 1;
         }
         this.head = head;
     }
 
-    public Node getHead () {
+    public NodeSmall getHead () {
         return this.head;
     }
 
@@ -121,13 +121,13 @@ class LinkedListSmall {
         return headNull;
     }
 
-    //adding a node to the last position of the list
-    public void pushNode (Node newNode) {
+    //adding a NodeSmall to the last position of the list
+    public void pushNode (NodeSmall newNode) {
         if (newNode != null) {
             if (isHeadNull()) {
                 this.head = newNode;
             }else {
-                Node current = this.head;
+                NodeSmall current = this.head;
                 while (current.getNextNode() != null) {
                     current = current.getNextNode();
                 }
@@ -139,8 +139,8 @@ class LinkedListSmall {
         }
     }
 
-    //inserting node into certain position (within the size of the new list)
-    public void insertNode (Node newNode, int pos) {
+    //inserting NodeSmall into certain position (within the size of the new list)
+    public void insertNode (NodeSmall newNode, int pos) {
         if (newNode == null) {
             warningNullParam();
         }else {
@@ -153,7 +153,7 @@ class LinkedListSmall {
                 if (pos == 0) {
                     unshiftList(newNode);
                 }else {
-                    Node currentNode = this.head;
+                    NodeSmall currentNode = this.head;
                     for (int x = 0; x < pos - 1; x++) {
                         currentNode = currentNode.getNextNode();
                     }
@@ -165,8 +165,8 @@ class LinkedListSmall {
         }
     }
 
-    //unshifting the list (adding node to index 0)
-    public void unshiftList (Node newNode) {
+    //unshifting the list (adding NodeSmall to index 0)
+    public void unshiftList (NodeSmall newNode) {
         if (newNode != null) {
             newNode.setNextNode(this.head);
             this.head = newNode;
@@ -176,7 +176,7 @@ class LinkedListSmall {
         }
     }
 
-    //shifting the list (removing the first node)
+    //shifting the list (removing the first NodeSmall)
     public void shiftList () {
         if (!isHeadNull()) {
             this.head = this.head.getNextNode();
@@ -184,21 +184,21 @@ class LinkedListSmall {
         }
     }
 
-    //removing a node a from a specific position
+    //removing a NodeSmall a from a specific position
     public void deleteNode (int pos) {
         if (pos > size || pos < 0) {
             System.out.println("Position " + pos + " out of list's boundary");
         }else {
             if (!isHeadNull()) {
-                Node prev = this.head;
+                NodeSmall prev = this.head;
                 for (int index = 0; index < pos - 1; index++) {
                     prev = prev.getNextNode();
                 }
-                Node current = prev.getNextNode();
+                NodeSmall current = prev.getNextNode();
                 if (pos == 0 ){
                     shiftList();
                 }else {
-                    Node next = current.getNextNode();
+                    NodeSmall next = current.getNextNode();
                     prev.setNextNode(next);
                     this.size--;
                 }
@@ -207,8 +207,8 @@ class LinkedListSmall {
     }
 
     public void deleteSpecificValue(int value) {
-        Node prev = null;
-        Node current = this.head;
+        NodeSmall prev = null;
+        NodeSmall current = this.head;
         while (current != null) {
             if (current.getValue() == value) {
                 if (prev == null) {
@@ -239,7 +239,7 @@ class LinkedListSmall {
     public String toString () {
         String list = "";
         if (!isHeadNull()) {
-            Node current = this.head;
+            NodeSmall current = this.head;
             while (current != null) {
                 list = list + current.getValue();
                 current = current.getNextNode();
