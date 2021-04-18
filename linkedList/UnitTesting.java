@@ -48,7 +48,6 @@ public class UnitTesting {
         assertEquals(list.getSize(), 4);
 
         LinkedList list_2 = new LinkedList(null);
-        list_2.printList();
         list_2.insertNode(new Node(1), 0);
 
         assertEquals(list_2.getSize(), 1);
@@ -124,9 +123,41 @@ public class UnitTesting {
     }
 
     @Test
-    public void testIterateReverseList() {
-        Node initialHeadNode = new Node(0);
-        LinkedList list = new LinkedList(initialHeadNode);
+    public void testDeleteSpecific () {
+        LinkedList list = new LinkedList(new Node(0));
+        list.pushNode(new Node(3));
+        list.pushNode(new Node(4));
+        list.pushNode(new Node(8));
+        list.pushNode(new Node(4));
+        list.pushNode(new Node(4));
+        list.pushNode(new Node(9));
+
+        assertEquals(list.toString(), "0 -> 3 -> 4 -> 8 -> 4 -> 4 -> 9");
+
+        list.deleteSpecificValue(4);
+        list.printList();
+        assertEquals(list.toString(), "0 -> 3 -> 8 -> 9");
+    }
+
+    @Test
+    public void testDeleteDuplicate () {
+        LinkedList list = new LinkedList(new Node(0));
+        list.pushNode(new Node(3));
+        list.pushNode(new Node(4));
+        list.pushNode(new Node(4));
+        list.pushNode(new Node(8));
+        list.pushNode(new Node(9));
+        list.pushNode(new Node(4));
+        list.pushNode(new Node(8));
+        assertEquals(list.toString(), "0 -> 3 -> 4 -> 4 -> 8 -> 9 -> 4 -> 8");
+
+        list.removeDuplicate();
+        assertEquals(list.toString(), "0 -> 3 -> 4 -> 8 -> 9");
+    }
+
+    @Test
+    public void testReverseList() {
+        LinkedList list = new LinkedList(new Node(0));
 
         list.pushNode(new Node(1));
         list.pushNode(new Node(2));

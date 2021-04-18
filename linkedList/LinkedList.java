@@ -5,7 +5,7 @@ public class LinkedList {
     private int size;
 
     public LinkedList (Node head) {
-        if (this.head != null) {
+        if (this.head == null && head != null) {
             this.size = 1;
         }
         this.head = head;
@@ -140,8 +140,9 @@ public class LinkedList {
                 }else {
                     prev.setNextNode(current.getNextNode());
                 }
+            }else {
+                prev = current;
             }
-            prev = current;
             current = current.getNextNode();
         }
     }
