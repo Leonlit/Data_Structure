@@ -1,6 +1,5 @@
 public class ArrayStack {
-    private int size;
-    private int index;
+    private int size, index, contentWidth;
     private String stack[];
 
     public ArrayStack (int size, String top) {
@@ -18,6 +17,9 @@ public class ArrayStack {
         if (this.isFull()) {
             System.out.println("Error, the stack is full");
         }else {
+            if (character.length() > this.contentWidth) {
+                this.contentWidth = character.length();
+            }
             this.stack[this.index] = character;
             this.index++;
         }
@@ -26,7 +28,7 @@ public class ArrayStack {
     public String pop () {
         if (!this.isEmpty()) {
             this.index--;
-            System.out.println("Popped out " + this.stack[this.index]);
+            System.out.println("\nPopped out " + this.stack[this.index]);
             return this.stack[index];
         }
         return null;
@@ -63,18 +65,44 @@ public class ArrayStack {
     }
     
     public void horizontalBorder() {
-        for (int idx=0;idx<(size * 4 + 1);idx++) {
+        for (int idx=0;idx<(this.size * (this.contentWidth + 3) + 1);idx++) {
             System.out.print("-");
         }
         System.out.println();
     }
 
     public void printStackContentVertically () {
-        
+        System.out.println("\nStack contents vertically\n");
+        if (this.isFull()) {
+            verticalBaseBorder();
+        }
+        printEmptyVerticalSpace(this.size, this.index);
+        for (int idx=this.index - 1;idx >= 0;idx--) {
+            System.out.println("| " + this.stack[idx] + " |");
+            verticalBaseBorder();
+        }
     }
 
     public void printStackContentReversedVertically () {
         
+    }
+
+    private void printEmptyVerticalSpace (int size, int index) {
+        String spaces = "";
+        for (int idx=0;idx<contentWidth + 2;idx++) {
+            spaces += " ";
+        }
+        for (int idx=0;idx< (size - index);idx++) {
+            System.out.println("|" + spaces + "|");
+            verticalBaseBorder();
+        }
+    }
+
+    private void verticalBaseBorder () {
+        for (int hor=0;hor < this.contentWidth * 3 + 2;hor++) {
+            System.out.print("-");
+        }
+        System.out.println();
     }
 
 }

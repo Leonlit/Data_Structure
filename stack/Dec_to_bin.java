@@ -5,7 +5,7 @@ public class Dec_to_bin {
         Scanner input = new Scanner(System.in);
         String numberInString = input.nextLine();
 
-        ArrayStack stack = new ArrayStack(16);
+        ArrayStack stack = new ArrayStack(30);
         int number = stringToInt(numberInString);
 
         while (number > 0) {
@@ -20,6 +20,7 @@ public class Dec_to_bin {
         String test = stack.pop();
         System.out.println(test);
         stack.printStackContent();
+        stack.printStackContentVertically();
     }
 
     public static int stringToInt(String number ) {
