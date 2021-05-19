@@ -5,18 +5,21 @@ public class Dec_to_bin {
         Scanner input = new Scanner(System.in);
         String numberInString = input.nextLine();
 
-        ArrayStack stack = new ArrayStack(32);
+        ArrayStack stack = new ArrayStack(16);
         int number = stringToInt(numberInString);
 
         while (number > 0) {
-            char chr = Integer.toString(number % 2).charAt(0);
+            String chr = Integer.toString(number % 2);
             stack.push(chr);
             number /= 2;
         }
 
-        stack.printStackHorizontally();
         stack.printStackContent();
+        stack.printStackContentReversed();
         input.close();
+        String test = stack.pop();
+        System.out.println(test);
+        stack.printStackContent();
     }
 
     public static int stringToInt(String number ) {
