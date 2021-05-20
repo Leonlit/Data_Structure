@@ -14,6 +14,10 @@ public class ArrayStack {
     }
 
     public void push (String character) {
+        if (isEmpty()) {
+            System.out.println("Stack is Empty");
+            return ;
+        }
         if (this.isFull()) {
             System.out.println("Error, the stack is full");
         }else {
@@ -26,6 +30,10 @@ public class ArrayStack {
     }
 
     public String pop () {
+        if (isEmpty()) {
+            System.out.println("Stack is Empty");
+            return null;
+        }
         if (!this.isEmpty()) {
             this.index--;
             System.out.println("\nPopped out " + this.stack[this.index]);
@@ -43,6 +51,10 @@ public class ArrayStack {
     }
 
     public void printStackContent () {
+        if (isEmpty()) {
+            System.out.println("Stack is Empty");
+            return ;
+        }
         System.out.println("\nStack Contents: ");
         horizontalBorder();
         System.out.print("| ");
@@ -54,6 +66,10 @@ public class ArrayStack {
     }
 
     public void printStackContentReversed () {
+        if (isEmpty()) {
+            System.out.println("Stack is Empty");
+            return ;
+        }
         System.out.println("\nStack Contents in reverse: ");
         horizontalBorder();
         System.out.print("| ");
@@ -72,6 +88,10 @@ public class ArrayStack {
     }
 
     public void printStackContentVertically () {
+        if (isEmpty()) {
+            System.out.println("Stack is Empty");
+            return ;
+        }
         System.out.println("\nStack contents vertically\n");
         if (this.isFull()) {
             verticalBaseBorder();
@@ -81,10 +101,6 @@ public class ArrayStack {
             System.out.println("| " + this.stack[idx] + " |");
             verticalBaseBorder();
         }
-    }
-
-    public void printStackContentReversedVertically () {
-        
     }
 
     private void printEmptyVerticalSpace (int size, int index) {
