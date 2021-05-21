@@ -14,10 +14,6 @@ public class ArrayStack {
     }
 
     public void push (String character) {
-        if (isEmpty()) {
-            System.out.println("Stack is Empty");
-            return ;
-        }
         if (this.isFull()) {
             System.out.println("Error, the stack is full");
         }else {
