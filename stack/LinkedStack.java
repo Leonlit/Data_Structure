@@ -41,6 +41,10 @@ public class LinkedStack {
         return null;
     }
 
+    public Node top () {
+        return head;
+    }
+
     public boolean isEmpty() {
         return index == 0;
     }

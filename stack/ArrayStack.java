@@ -38,6 +38,10 @@ public class ArrayStack {
         return null;
     }
 
+    public String top (){
+        return this.stack[index - 1];
+    }
+
     public boolean isEmpty() {
         return index == 0;
     }
