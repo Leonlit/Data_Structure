@@ -1,17 +1,17 @@
 import java.util.HashSet;
 
-public class LinkedList {
-    private Node head;
+public class LinkedList<Type> {
+    private Node<Type> head;
     private int size;
 
-    public LinkedList (Node head) {
+    public LinkedList (Node<Type> head) {
         if (this.head == null && head != null) {
             this.size = 1;
         }
         this.head = head;
     }
 
-    public Node getHead () {
+    public Node<Type> getHead () {
         return this.head;
     }
 
@@ -24,12 +24,12 @@ public class LinkedList {
     }
 
     //adding a node to the last position of the list
-    public void pushNode (Node newNode) {
+    public void pushNode (Node<Type> newNode) {
         if (newNode != null) {
             if (isHeadNull()) {
                 this.head = newNode;
             }else {
-                Node current = this.head;
+                Node<Type> current = this.head;
                 while (current.getNextNode() != null) {
                     current = current.getNextNode();
                 }
@@ -42,7 +42,7 @@ public class LinkedList {
     }
 
     //inserting node into certain position (within the size of the new list)
-    public void insertNode (Node newNode, int pos) {
+    public void insertNode (Node<Type> newNode, int pos) {
         if (newNode == null) {
             warningNullParam();
         }else {
@@ -55,7 +55,7 @@ public class LinkedList {
                 if (pos == 0) {
                     unshiftList(newNode);
                 }else {
-                    Node currentNode = this.head;
+                    Node<Type> currentNode = this.head;
                     for (int x = 0; x < pos - 1; x++) {
                         currentNode = currentNode.getNextNode();
                     }
@@ -68,7 +68,7 @@ public class LinkedList {
     }
 
     //unshifting the list (adding node to index 0)
-    public void unshiftList (Node newNode) {
+    public void unshiftList (Node<Type> newNode) {
         if (newNode != null) {
             newNode.setNextNode(this.head);
             this.head = newNode;
@@ -93,9 +93,9 @@ public class LinkedList {
                 shiftList();
                 return;
             }
-            Node current = this.head;
+            Node<Type> current = this.head;
             while (current.getNextNode() != null) {
-                Node nextNode = current.getNextNode();
+                Node<Type> nextNode = current.getNextNode();
                 if (nextNode.getNextNode() == null) {
                     current.setNextNode(null);
                 }else {
@@ -112,15 +112,15 @@ public class LinkedList {
             System.out.println("Position " + pos + " out of list's boundary");
         }else {
             if (!isHeadNull()) {
-                Node prev = this.head;
+                Node<Type> prev = this.head;
                 for (int index = 0; index < pos - 1; index++) {
                     prev = prev.getNextNode();
                 }
-                Node current = prev.getNextNode();
+                Node<Type> current = prev.getNextNode();
                 if (pos == 0 ){
                     this.head = this.head.getNextNode();
                 }else {
-                    Node next = current.getNextNode();
+                    Node<Type> next = current.getNextNode();
                     prev.setNextNode(next);
                 }
                 this.size--;
@@ -130,9 +130,9 @@ public class LinkedList {
     }
 
     //delete specific value from the linked list
-    public void deleteSpecificValue(int value) {
-        Node prev = null;
-        Node current = this.head;
+    public void deleteSpecificValue(Type value) {
+        Node<Type> prev = null;
+        Node<Type> current = this.head;
         while (current != null) {
             if (current.getValue() == value) {
                 if (prev == null) {
@@ -150,11 +150,11 @@ public class LinkedList {
     //remove duplicate values in linked list
     public void removeDuplicate () {
         if (!isHeadNull()) {
-            HashSet<Integer> hash = new HashSet<>();
-            Node current = this.head;
-            Node prev = null;
+            HashSet<Type> hash = new HashSet<>();
+            Node<Type> current = this.head;
+            Node<Type> prev = null;
             while (current != null) {
-                int currValue = current.getValue();
+                Type currValue = current.getValue();
 
                 if (hash.contains(currValue)) {
                     prev.setNextNode(current.getNextNode());
@@ -170,7 +170,7 @@ public class LinkedList {
     //reversing linked list using iterative method
     public void iterateReverseList() {
         if (!isHeadNull()) {
-            Node curr, next, prev;
+            Node<Type> curr, next, prev;
             curr = this.head;
             prev = null;
             while (curr != null) {
@@ -184,7 +184,7 @@ public class LinkedList {
     }
 
     //recursively reversing a linkedlist
-    public void recursivelyReverseList (Node curr) {
+    public void recursivelyReverseList (Node<Type> curr) {
         if (curr == null) {
             curr = this.head;
         }
@@ -217,7 +217,7 @@ public class LinkedList {
     public String toString () {
         String list = "";
         if (!isHeadNull()) {
-            Node current = this.head;
+            Node<Type> current = this.head;
             while (current != null) {
                 list = list + current.getValue();
                 current = current.getNextNode();
