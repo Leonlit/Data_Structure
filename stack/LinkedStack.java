@@ -1,10 +1,10 @@
-public class LinkedStack {
+public class LinkedStack<T> {
     private int size, index, contentWidth;
-    private Node head;
+    private Node<T> head;
 
-    public LinkedStack (int size, String top) {
+    public LinkedStack (int size, T top) {
         this.size = size;
-        this.head = new Node(top);
+        this.head = new Node<T>(top);
         this.push(top);
     }
 
@@ -12,17 +12,17 @@ public class LinkedStack {
         this.size = size;
     }
 
-    public void push (String character) {
+    public void push (T character) {
         if (this.isFull()) {
             System.out.println("Error, the stack is full");
         }else {
-            if (character.length() > this.contentWidth) {
-                this.contentWidth = character.length();
+            if (character.toString().length() > this.contentWidth) {
+                this.contentWidth = character.toString().length();
             }
             if (isEmpty()) {
-                this.head = new Node(character);
+                this.head = new Node<T>(character);
             }else {
-                Node temp = new Node(character);
+                Node<T> temp = new Node<T>(character);
                 temp.setNextNode(this.head);
                 this.head = temp;
             }
@@ -30,18 +30,18 @@ public class LinkedStack {
         }
     }
 
-    public Node pop () {
+    public Node<T> pop () {
         if (!this.isEmpty()) {
             this.index--;
             System.out.println("\nPopped out " + this.head.getValue());
-            Node temp = this.head;
+            Node<T> temp = this.head;
             this.head = this.head.getNextNode();
             return temp;
         }
         return null;
     }
 
-    public Node top () {
+    public Node<T> top () {
         return head;
     }
 
@@ -59,7 +59,7 @@ public class LinkedStack {
             return ;
         }
         System.out.println("\nStack Contents: ");
-        Node curr = head;
+        Node<T> curr = head;
         while (curr != null) {
             System.out.print(curr.getValue() + " -> ");
             curr = curr.getNextNode();
@@ -68,32 +68,32 @@ public class LinkedStack {
     }
 }
 
-class Node {
-    private Node next;
-    private String value;
+class Node<T> {
+    private Node<T> next;
+    private T value;
 
-    public Node (String value) {
+    public Node (T value) {
         this.value = value;
     }
 
-    public Node (Node next, String value) {
+    public Node (Node<T> next, T value) {
         this.next = next;
         this.value = value;
     }
 
-    public Node getNextNode() {
+    public Node<T> getNextNode() {
         return this.next;
     }
 
-    public String getValue() {
+    public T getValue() {
         return this.value;
     }
 
-    public void setNextNode (Node newNode) {
+    public void setNextNode (Node<T> newNode) {
         this.next = newNode;
     }
 
-    public void updateValue (String newValue) {
+    public void updateValue (T newValue) {
         this.value = newValue;
     }
 }

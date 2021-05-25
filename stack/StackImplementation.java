@@ -13,10 +13,10 @@ public class StackImplementation {
         stack.printStackContent();
         stack.printStackContentVertically();
 
-        String str2 = "test123456123456789011";
-        LinkedStack stack2 = new LinkedStack(str2.length());
+        String str2 = "123456123456789011";
+        LinkedStack<Double> stack2 = new LinkedStack<Double>(str2.length() - 2);
         for (int idx = 0;idx < str2.length();idx++) {
-            stack2.push(Character.toString(str2.charAt(idx)));
+            stack2.push((double)Character.getNumericValue(str2.charAt(idx)));
         }
 
         stack2.printStackContent();
