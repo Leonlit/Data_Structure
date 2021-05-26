@@ -3,12 +3,16 @@ import java.util.HashSet;
 public class LinkedList<Type> {
     private Node<Type> head;
     private int size;
+    Node<Type> temp;
 
-    public LinkedList (Node<Type> head) {
-        if (this.head == null && head != null) {
-            this.size = 1;
+    public LinkedList (Type initial) {
+        if (initial != null) {
+            if (this.head == null && initial != null) {
+                this.size = 1;
+            }
+            temp = new Node<Type>(initial);
+            this.head = temp;
         }
-        this.head = head;
     }
 
     public Node<Type> getHead () {
@@ -24,16 +28,17 @@ public class LinkedList<Type> {
     }
 
     //adding a node to the last position of the list
-    public void pushNode (Node<Type> newNode) {
+    public void pushNode (Type newNode) {
         if (newNode != null) {
+            temp = new Node<Type>(newNode);
             if (isHeadNull()) {
-                this.head = newNode;
+                this.head = temp;
             }else {
                 Node<Type> current = this.head;
                 while (current.getNextNode() != null) {
                     current = current.getNextNode();
                 }
-                current.setNextNode(newNode);
+                current.setNextNode(temp);
             }
             this.size++;
         }else {
@@ -42,7 +47,7 @@ public class LinkedList<Type> {
     }
 
     //inserting node into certain position (within the size of the new list)
-    public void insertNode (Node<Type> newNode, int pos) {
+    public void insertNode (Type newNode, int pos) {
         if (newNode == null) {
             warningNullParam();
         }else {
@@ -52,6 +57,7 @@ public class LinkedList<Type> {
             if (pos - 1 > size || pos < 0) {
                 System.out.println("Position " + pos + " out of list's boundary");
             }else {
+                temp = new Node<Type>(newNode);
                 if (pos == 0) {
                     unshiftList(newNode);
                 }else {
@@ -59,8 +65,8 @@ public class LinkedList<Type> {
                     for (int x = 0; x < pos - 1; x++) {
                         currentNode = currentNode.getNextNode();
                     }
-                    newNode.setNextNode(currentNode.getNextNode());
-                    currentNode.setNextNode(newNode);
+                    temp.setNextNode(currentNode.getNextNode());
+                    currentNode.setNextNode(temp);
                     this.size++;
                 }
             }
@@ -68,10 +74,11 @@ public class LinkedList<Type> {
     }
 
     //unshifting the list (adding node to index 0)
-    public void unshiftList (Node<Type> newNode) {
+    public void unshiftList (Type newNode) {
         if (newNode != null) {
-            newNode.setNextNode(this.head);
-            this.head = newNode;
+            Node<Type> temp = new Node<Type>(newNode);
+            temp.setNextNode(this.head);
+            this.head = temp;
             this.size++;
         }else {
             warningNullParam();
