@@ -16,6 +16,7 @@ public class Queue<type> {
     int front, rear, maxSize, currSize;
     type arr[];
     
+    @SuppressWarnings("unchecked")
     public Queue (int maxSize) {
         front = rear = -1;
         this.maxSize = maxSize;
