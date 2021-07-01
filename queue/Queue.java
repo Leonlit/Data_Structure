@@ -50,16 +50,24 @@ public class Queue<type> {
             front = rear = -1;
             return null;
         }else {
+            type value = arr[front];
             front++;
-            return arr[front];
+            return value;
         }
     }
 
-    public void printQueue () {
-        System.out.println();
+    @Override
+    public String toString () {
+        if (isEmpty())
+            return "";
+        
+        String text = "";
         for (int idx = front; idx <= rear; idx++) {
-            System.out.print(arr[idx] + " | ");
+            text += arr[idx];
+            if (idx != rear) {
+                text += " | ";
+            }
         }
-        System.out.println();
+        return text;
     }
 }

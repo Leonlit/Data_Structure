@@ -1,6 +1,6 @@
 package linkedList;
 
-class Node<Type> {
+public class Node<Type> {
     private Node<Type> next;
     private Type value;
 
