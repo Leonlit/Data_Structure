@@ -1,4 +1,4 @@
-package NameInCharArray;
+package array;
 
 import java.util.Scanner;
 

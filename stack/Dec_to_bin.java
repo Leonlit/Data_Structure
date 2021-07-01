@@ -1,3 +1,5 @@
+package stack;
+
 import java.util.Scanner;
 
 public class Dec_to_bin {

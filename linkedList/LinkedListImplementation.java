@@ -1,3 +1,5 @@
+package linkedList;
+
 public class LinkedListImplementation {
     public static void main (String args[]) {
         //creating new LinkedList<Integer> Object

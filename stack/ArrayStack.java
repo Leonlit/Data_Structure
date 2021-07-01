@@ -1,3 +1,4 @@
+package stack;
 public class ArrayStack {
     private int size, index, contentWidth;
     private String stack[];

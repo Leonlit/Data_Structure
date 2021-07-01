@@ -1,3 +1,5 @@
+package stack;
+
 public class LinkedStack<T> {
     private int size, index, contentWidth;
     private Node<T> head;

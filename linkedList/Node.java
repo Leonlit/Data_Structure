@@ -1,3 +1,5 @@
+package linkedList;
+
 class Node<Type> {
     private Node<Type> next;
     private Type value;
