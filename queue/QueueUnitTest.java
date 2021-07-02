@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Test;
 
-public class UnitTesting {
+public class QueueUnitTest {
     @Test
     public void testNormalQueue () {
         Queue<Integer> queue = new Queue<Integer>(10);

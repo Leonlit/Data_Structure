@@ -30,9 +30,11 @@ public class QueueImplementation {
         test.enqueue(90);
         test.enqueue(-1);
         test.dequeue();
-        System.out.println(test.toString()); */
+        System.out.println(test.toString()); 
+        */
 
-        /* //linkedList queue
+        /* 
+        //linkedList queue
         QueueLinkedList<Integer> linkedListQueue = new QueueLinkedList<Integer>(20);
         linkedListQueue.enqueue(10);
         linkedListQueue.enqueue(40);
@@ -42,7 +44,8 @@ public class QueueImplementation {
         System.out.println(linkedListQueue.dequeue());
         System.out.println(linkedListQueue.dequeue());
         System.out.println(linkedListQueue.dequeue());
-        System.out.println(linkedListQueue.dequeue()); */
+        System.out.println(linkedListQueue.dequeue()); 
+        */
 
         //Circular queue
         CircularQueue<Integer> test = new CircularQueue<Integer>(10);

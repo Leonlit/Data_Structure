@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Test;
 
-public class UnitTesting {
+public class LinkedListUnitTest {
     @Test
     public void testLinkedListCreationAndPushing () {
         LinkedList<Integer> list = new LinkedList<Integer>(1);
