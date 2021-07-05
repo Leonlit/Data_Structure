@@ -24,7 +24,7 @@ public class BinaryTree {
             if(current.getValue() == value){
                 System.out.println("Book Exists in library, and the path is as below: \n");
                 return path;
-            }else if(value < current.getValue()){
+            }else if(value <= current.getValue()){
                 current = current.getLeftNode();
                 path += " L " + current.getValue();
             }else{
@@ -57,5 +57,30 @@ public class BinaryTree {
         displayTreeInorder(root.getLeftNode());
         System.out.print(root.getValue() + "   ");
         displayTreeInorder(root.getRightNode());
+        if (root == this.root) {
+            System.out.println();;
+        }
+    }
+
+    public void displayTreePreorder (TreeNode root) {
+        if (root == null)
+            return;
+        System.out.print(root.getValue() + "   ");
+        displayTreeInorder(root.getLeftNode());
+        displayTreeInorder(root.getRightNode());
+        if (root == this.root) {
+            System.out.println();;
+        }
+    }
+
+    public void displayTreePostorder (TreeNode root) {
+        if (root == null)
+            return;
+        displayTreeInorder(root.getLeftNode());
+        displayTreeInorder(root.getRightNode());
+        System.out.print(root.getValue() + "   ");
+        if (root == this.root) {
+            System.out.println();;
+        }
     }
 }

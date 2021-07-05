@@ -12,5 +12,7 @@ public class BST_Implementation {
         System.out.println();
         tree.displayTreeInorder(tree.getRoot());
         System.out.println(tree.bst(8));
+        tree.displayTreePreorder(tree.getRoot());
+        tree.displayTreePostorder(tree.getRoot());
     }
 }
