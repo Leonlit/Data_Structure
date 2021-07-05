@@ -22,9 +22,9 @@ public class BinaryTree {
         path += value;
         while(current != null){
             if(current.getValue() == value){
-                System.out.println("Book Exists in library, and the path is as below: \n");
+                System.out.println("The value is found in the tree");
                 return path;
-            }else if(value <= current.getValue()){
+            }else if(value < current.getValue()){
                 current = current.getLeftNode();
                 path += " L " + current.getValue();
             }else{
@@ -37,10 +37,15 @@ public class BinaryTree {
     }
 
     public TreeNode insert (TreeNode root, int value) {
+        
         TreeNode newNode = new TreeNode(value);
         if (root == null) {
             return newNode;
         }else {
+            if (root.getValue() == value) {
+                System.out.println("failed to insert value " + value + " into tree (duplicate value)");
+                return root;
+            }
             if (value < root.getValue()) {
                 root.setLeftNode(insert(root.getLeftNode(), value));
             }else {
