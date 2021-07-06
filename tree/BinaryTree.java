@@ -50,7 +50,7 @@ public class BinaryTree<type extends Comparable<type>> {
         return false;
     }
 
-    public TreeNode<type> insert (TreeNode<type> root, type value) {
+    private TreeNode<type> insert (TreeNode<type> root, type value) {
 
         TreeNode<type> newNode = new TreeNode<type>(value);
 
@@ -66,11 +66,61 @@ public class BinaryTree<type extends Comparable<type>> {
         return root;
     }
 
+    public boolean remove(type value) {
+        if (contains(this.root, value)) {
+            this.root = remove(this.root, value);
+            return true;
+        }
+        return false;
+    }
+
+    private TreeNode<type> remove (TreeNode<type> root, type value) {
+        if (isNodeNull(root)) {
+            return null;
+        }
+        int cmp = value.compareTo(root.getValue());
+
+        if (cmp < 0) 
+            root.setLeftNode(remove(root.getLeftNode(), value));
+        else if (cmp > 0)
+            root.setRightNode(remove(root.getRightNode(), value));
+        else {
+            if (isNodeNull(root.getLeftNode())) {  //only when the right tree is present and left side is null
+                TreeNode<type> tempRight = root.getRightNode();
+                root.setNewValue(null);
+                root = null;
+                return tempRight;
+            }else if (isNodeNull(root.getRightNode())) { //only when the left tree is present and right side is null
+                TreeNode<type> tempLeft = root.getLeftNode();
+                root.setNewValue(null);
+                root = null;
+                return tempLeft;
+            }else { //both subtree present
+                //digging through the left nodes of the right node of the current root
+                TreeNode<type> temp = digLeftSubree(root.getRightNode());
+                //swapping the values
+                root.setNewValue(temp.getValue());
+                //removing the node used to replace the deleted node
+                root.setRightNode(remove(root.getRightNode(),temp.getValue()));
+
+            }
+        }
+        return root;
+    }
+
+    public TreeNode<type> digLeftSubree (TreeNode<type> node) {
+        TreeNode<type> curr = node;
+        while (curr.getLeftNode() != null) {
+            curr = curr.getLeftNode();
+        }
+        return curr;
+    }
+
     public boolean contains (type value) {
         return contains (this.root, value);
     }
 
-    public boolean contains(TreeNode<type> root, type value) {
+    private boolean contains(TreeNode<type> root, type value) {
         if (isNodeNull(root)) {
             return false;
         }

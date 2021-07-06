@@ -27,8 +27,6 @@ public class CheckIfTreeIsValid {
     }
 
 
-
-
     //slow approach, need O(n^) time complexity
     public static boolean isValidTree (TreeNode<Integer> currNode) {
         if (isNodeNull(currNode)) {
