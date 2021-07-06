@@ -1,37 +1,36 @@
 package tree;
 
-public class TreeNode {
+public class TreeNode<type> {
     
-    private int data;
-    private TreeNode left, right;
+    private type data;
+    private TreeNode<type> left, right;
 
-    public TreeNode (int value) {
+    public TreeNode (type value) {
         this.data = value;
         left = right = null;
-
     }
 
-    public void setLeftNode (TreeNode node) {
+    public void setLeftNode (TreeNode<type> node) {
         this.left = node;
     }
 
-    public void setRightNode (TreeNode node) {
+    public void setRightNode (TreeNode<type> node) {
         this.right = node;
     }
 
-    public void setNewValue (int newValue) {
+    public void setNewValue (type newValue) {
         this.data = newValue;
     }
 
-    public TreeNode getLeftNode () {
+    public TreeNode<type> getLeftNode () {
         return this.left;
     }
 
-    public TreeNode getRightNode () {
+    public TreeNode<type> getRightNode () {
         return this.right;
     }
 
-    public int getValue () {
+    public type getValue () {
         return this.data;
     }
 

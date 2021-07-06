@@ -1,21 +1,21 @@
 package tree;
 
-public class BinaryTree {
-    TreeNode root;
+public class BinaryTree<type extends Comparable<type>> {
+    TreeNode<type> root;
 
-    public BinaryTree (Integer value) {
+    public BinaryTree (type value) {
         if (value != null) {
-            this.root = new TreeNode(value);
+            this.root = new TreeNode<type>(value);
         }
     }
 
-    public TreeNode getRoot () {
+    public TreeNode<type> getRoot () {
         return this.root;
     }
 
     //binary search tree
-    public String bst (int value) {
-        TreeNode current = this.root;
+    public String bst (type value) {
+        TreeNode<type> current = this.root;
         String path = "";
         if (this.root == null)
             return "";
@@ -24,7 +24,7 @@ public class BinaryTree {
             if(current.getValue() == value){
                 System.out.println("The value is found in the tree");
                 return path;
-            }else if(value < current.getValue()){
+            }else if(value.compareTo(current.getValue()) < 0){
                 current = current.getLeftNode();
                 path += " L " + current.getValue();
             }else{
@@ -36,56 +36,64 @@ public class BinaryTree {
         return "";
     }
 
-    public TreeNode insert (TreeNode root, int value) {
-        
-        TreeNode newNode = new TreeNode(value);
+    public boolean insert (type value) {
+        if (value == null) {
+            System.out.println("No value is provided");
+        }else{
+            if (!contains(value)) {
+                this.root = insert(this.root, value);
+                return true;
+            }else {
+                System.out.println("Error, dupplicate value");
+            }
+        }
+        return false;
+    }
+
+    public TreeNode<type> insert (TreeNode<type> root, type value) {
+
+        TreeNode<type> newNode = new TreeNode<type>(value);
+
         if (root == null) {
             return newNode;
+        }
+
+        if (value.compareTo(root.getValue()) < 0) {
+            root.setLeftNode(insert(root.getLeftNode(), value));
         }else {
-            if (root.getValue() == value) {
-                System.out.println("failed to insert value " + value + " into tree (duplicate value)");
-                return root;
-            }
-            if (value < root.getValue()) {
-                root.setLeftNode(insert(root.getLeftNode(), value));
-            }else {
-                root.setRightNode(insert(root.getRightNode(), value));
-            }
+            root.setRightNode(insert(root.getRightNode(), value));
         }
         return root;
     }
 
-    //for testing the position
-    public void displayTreeInorder (TreeNode root) {
-        if (root == null)
-            return;
-        displayTreeInorder(root.getLeftNode());
-        System.out.print(root.getValue() + "   ");
-        displayTreeInorder(root.getRightNode());
-        if (root == this.root) {
-            System.out.println();;
-        }
+    public boolean contains (type value) {
+        return contains (this.root, value);
     }
 
-    public void displayTreePreorder (TreeNode root) {
-        if (root == null)
-            return;
-        System.out.print(root.getValue() + "   ");
-        displayTreeInorder(root.getLeftNode());
-        displayTreeInorder(root.getRightNode());
-        if (root == this.root) {
-            System.out.println();;
+    public boolean contains(TreeNode<type> root, type value) {
+        if (isNodeNull(root)) {
+            return false;
         }
+
+        int cmp = value.compareTo(root.getValue());
+        if (cmp < 0)
+            return contains(root.getLeftNode(), value);
+        if (cmp > 0)
+            return contains (root.getRightNode(), value);
+        
+        return true;
     }
 
-    public void displayTreePostorder (TreeNode root) {
-        if (root == null)
-            return;
-        displayTreeInorder(root.getLeftNode());
-        displayTreeInorder(root.getRightNode());
-        System.out.print(root.getValue() + "   ");
-        if (root == this.root) {
-            System.out.println();;
+    public boolean isNodeNull (TreeNode<type> node) {   
+        return node == null;
+    }
+
+    public int treeHeight (TreeNode<type> root) {
+        if (root == null) {
+            return -1;
         }
+        int leftSubTree = treeHeight(root.getLeftNode());
+        int rightSubTree = treeHeight(root.getRightNode());
+        return Math.max(leftSubTree, rightSubTree) + 1;
     }
 }
