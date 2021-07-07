@@ -24,8 +24,8 @@ public class TreePrinter<type> {
         if (root == null)
             return;
         System.out.print(root.getValue() + "   ");
-        displayTreeInorder(root.getLeftNode());
-        displayTreeInorder(root.getRightNode());
+        displayTreePreorder(root.getLeftNode());
+        displayTreePreorder(root.getRightNode());
         if (root == initial) {
             System.out.println();
         }
@@ -34,8 +34,8 @@ public class TreePrinter<type> {
     public void displayTreePostorder (TreeNode<type> root) {
         if (root == null)
             return;
-        displayTreeInorder(root.getLeftNode());
-        displayTreeInorder(root.getRightNode());
+        displayTreePostorder(root.getLeftNode());
+        displayTreePostorder(root.getRightNode());
         System.out.print(root.getValue() + "   ");
         if (root == initial) {
             System.out.println();

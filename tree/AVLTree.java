@@ -268,8 +268,8 @@ public class AVLTree<type extends Comparable<type>> {
         if (node == null)
             return;
         System.out.print(node.getValue() + "   ");
-        displayTreeInorder(node.getLeftNode());
-        displayTreeInorder(node.getRightNode());
+        displayTreePreorder(node.getLeftNode());
+        displayTreePreorder(node.getRightNode());
         if (node == this.root) {
             System.out.println();
         }
@@ -278,8 +278,8 @@ public class AVLTree<type extends Comparable<type>> {
     public void displayTreePostorder (AVLNode node) {
         if (node == null)
             return;
-        displayTreeInorder(node.getLeftNode());
-        displayTreeInorder(node.getRightNode());
+        displayTreePostorder(node.getLeftNode());
+        displayTreePostorder(node.getRightNode());
         System.out.print(node.getValue() + "   ");
         if (node == this.root) {
             System.out.println();
