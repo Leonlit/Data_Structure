@@ -26,19 +26,11 @@ public class AVLTree<type extends Comparable<type>> {
         }
 
         public void setRightNode (AVLNode node) {
-            if (node == null) {
-                return;
-            }else {
-                this.right = node;
-            }
+            this.right = node;
         }
 
         public void setLeftNode (AVLNode node) {
-            if (node == null) {
-                return;
-            }else {
-                this.left = node;
-            }
+            this.left = node;
         }
 
         public void setNewValue (type value) {
@@ -46,9 +38,6 @@ public class AVLTree<type extends Comparable<type>> {
                 return;
             this.value = value;
         }
-
-        
-        
     }
 
     AVLNode root;
@@ -78,28 +67,28 @@ public class AVLTree<type extends Comparable<type>> {
         return false;
     }
 
-    private AVLNode insert(AVLNode root, type value) {
-        if (root == null)
+    private AVLNode insert(AVLNode node, type value) {
+        if (node == null)
             return new AVLNode(value);
         
-        int cmp = value.compareTo(root.getValue());
+        int cmp = value.compareTo(node.getValue());
         System.out.println(cmp);
         if (cmp < 0) {
             System.out.println("inserted " + value + " to left");
-            root.setLeftNode(insert(root.getLeftNode(), value));
+            node.setLeftNode(insert(node.getLeftNode(), value));
         }else {
             System.out.println("inserted " + value + " to right");
-            root.setRightNode(insert(root.getRightNode(), value));
+            node.setRightNode(insert(node.getRightNode(), value));
         }
-        updateNode(root);
-        return balance(root);
+        updateNode(node);
+        return balance(node);
     }
 
     public boolean contains (type value) {
         return contains(this.root, value);
     }
 
-    public boolean contains (AVLNode node, type value) {
+    private boolean contains (AVLNode node, type value) {
         if (node == null) {
             return false;
         }
@@ -185,49 +174,49 @@ public class AVLTree<type extends Comparable<type>> {
         return false;
     }
 
-    private AVLNode remove (AVLNode root, type value) {
-        if (isNodeNull(root)) {
+    private AVLNode remove (AVLNode node, type value) {
+        if (isNodeNull(node)) {
             return null;
         }
-        int cmp = value.compareTo(root.getValue());
+        int cmp = value.compareTo(node.getValue());
 
         if (cmp < 0) 
-            root.setLeftNode(remove(root.getLeftNode(), value));
+            node.setLeftNode(remove(node.getLeftNode(), value));
         else if (cmp > 0)
-            root.setRightNode(remove(root.getRightNode(), value));
+            node.setRightNode(remove(node.getRightNode(), value));
         else {
-            if (isNodeNull(root.getLeftNode())) {  //only when the right tree is present and left side is null
-                AVLNode tempRight = root.getRightNode();
-                root.setNewValue(null);
-                root = null;
+            if (isNodeNull(node.getLeftNode())) {  //only when the right tree is present and left side is null
+                AVLNode tempRight = node.getRightNode();
+                node.setNewValue(null);
+                node = null;
                 return tempRight;
-            }else if (isNodeNull(root.getRightNode())) { //only when the left tree is present and right side is null
-                AVLNode tempLeft = root.getLeftNode();
-                root.setNewValue(null);
-                root = null;
+            }else if (isNodeNull(node.getRightNode())) { //only when the left tree is present and right side is null
+                AVLNode tempLeft = node.getLeftNode();
+                node.setNewValue(null);
+                node = null;
                 return tempLeft;
             }else { //both subtree present
                 //choose the one with higher high
-                if (root.getLeftNode().height < root.getRightNode().height ) {
-                    //digging through the right nodes of the left node of the current root
-                    AVLNode temp = findMax(root.getLeftNode());
+                if (node.getLeftNode().height < node.getRightNode().height ) {
+                    //digging through the right nodes of the left node of the current node
+                    AVLNode temp = findMax(node.getLeftNode());
                     //swapping the values
-                    root.setNewValue(temp.getValue());
+                    node.setNewValue(temp.getValue());
                     //removing the node used to replace the deleted node
-                    root.setLeftNode(remove(root.getLeftNode(),temp.getValue()));
+                    node.setLeftNode(remove(node.getLeftNode(),temp.getValue()));
                 }else {
-                    //digging through the left nodes of the right subtree node of the current root
-                    AVLNode temp = findMin(root.getRightNode());
+                    //digging through the left nodes of the right subtree node of the current node
+                    AVLNode temp = findMin(node.getRightNode());
                     //swapping the values
-                    root.setNewValue(temp.getValue());
+                    node.setNewValue(temp.getValue());
                     //removing the node used to replace the deleted node
-                    root.setRightNode(remove(root.getRightNode(),temp.getValue()));
+                    node.setRightNode(remove(node.getRightNode(),temp.getValue()));
                 }
 
             }
         }
-        updateNode(root);
-        return balance(root);
+        updateNode(node);
+        return balance(node);
     }
 
     public AVLNode findMax (AVLNode node) {
@@ -264,35 +253,35 @@ public class AVLTree<type extends Comparable<type>> {
         return getSize() == 0;
     }
 
-    public void displayTreeInorder (AVLNode root) {
-        if (root == null)
+    public void displayTreeInorder (AVLNode node) {
+        if (node == null)
             return;
-        displayTreeInorder(root.getLeftNode());
-        System.out.print(root.getValue() + "   ");
-        displayTreeInorder(root.getRightNode());
-        if (root == this.root) {
+        displayTreeInorder(node.getLeftNode());
+        System.out.print(node.getValue() + "   ");
+        displayTreeInorder(node.getRightNode());
+        if (node == this.root) {
             System.out.println();
         }
     }
 
-    public void displayTreePreorder (AVLNode root) {
-        if (root == null)
+    public void displayTreePreorder (AVLNode node) {
+        if (node == null)
             return;
-        System.out.print(root.getValue() + "   ");
-        displayTreeInorder(root.getLeftNode());
-        displayTreeInorder(root.getRightNode());
-        if (root == this.root) {
+        System.out.print(node.getValue() + "   ");
+        displayTreeInorder(node.getLeftNode());
+        displayTreeInorder(node.getRightNode());
+        if (node == this.root) {
             System.out.println();
         }
     }
 
-    public void displayTreePostorder (AVLNode root) {
-        if (root == null)
+    public void displayTreePostorder (AVLNode node) {
+        if (node == null)
             return;
-        displayTreeInorder(root.getLeftNode());
-        displayTreeInorder(root.getRightNode());
-        System.out.print(root.getValue() + "   ");
-        if (root == this.root) {
+        displayTreeInorder(node.getLeftNode());
+        displayTreeInorder(node.getRightNode());
+        System.out.print(node.getValue() + "   ");
+        if (node == this.root) {
             System.out.println();
         }
     }
